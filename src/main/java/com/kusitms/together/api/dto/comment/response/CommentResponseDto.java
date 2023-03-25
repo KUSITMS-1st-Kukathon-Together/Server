@@ -33,13 +33,13 @@ public class CommentResponseDto {
             this.isChild = isChild;
         }
 
-        public static CommentResponseDto from (Comment comment) {
+        public static CommentResponseDto from(Comment comment) {
             return new CommentResponseDto(
                     comment.getId(),
                     comment.getMember().getId(),
                     comment.getMember().getNickname(),
                     comment.getMember().getProfileImage(),
-                    comment.getParentComment().getId(),
+                    comment.getParentComment() == null ? null : comment.getParentComment().getId(),
                     comment.getContent(),
                     comment.getIsChild()
             );
