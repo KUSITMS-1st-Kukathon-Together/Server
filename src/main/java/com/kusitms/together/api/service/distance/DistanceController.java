@@ -25,6 +25,16 @@ public class DistanceController {
     public ResponseEntity<List<DistanceDto>> getNearPosts(@RequestBody DistanceReq req) {
         return new ResponseEntity<>(distanceService.getNearPosts(req.getLatitude(), req.getLongitude()), HttpStatus.OK);
     }
+
+    @ResponseBody
+    @PostMapping("/main")
+    public ResponseEntity<PageRes> mainPage(@RequestBody MainReq mainReq) {
+
+        List<DistanceDto> nearPosts = distanceService.getNearPosts(mainReq.getDistanceReq().getLatitude(), mainReq.getDistanceReq().getLongitude());
+        List<DistanceDto> allPost = distanceService.getAllPost(Category.valueOf(mainReq.getCategoryAndTypeReq().getCategory()), Type.valueOf(mainReq.getCategoryAndTypeReq().getType()));
+
+        return new ResponseEntity<>(new PageRes(nearPosts,allPost), HttpStatus.OK);
+    }
     @ResponseBody
     @PostMapping("/all")
     public ResponseEntity<List<DistanceDto>> getAllPosts(@RequestBody CategoryAndTypeReq CategoryAndTypeReq) {

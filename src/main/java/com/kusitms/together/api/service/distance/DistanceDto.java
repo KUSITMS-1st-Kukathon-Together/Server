@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class DistanceDto {
 
+    private Long id;
+
     private String title;
     private String location;
     private String content;

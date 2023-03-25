@@ -39,7 +39,8 @@ public class SecurityConfig {
                     "/h2-console/**",
                     "/api/auth/token",
                     "/near",
-                    "/all"
+                    "/all",
+                    "/main"
             );
         };
 

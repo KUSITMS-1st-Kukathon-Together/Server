@@ -25,8 +25,8 @@ public class DistanceService {
         for (String s : postByDistance) {
             String[] split = s.split(",");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-            LocalDateTime dateTime = LocalDateTime.parse(split[3], formatter);
-            newDistanceDto.add(new DistanceDto(split[0], split[1], split[2], dateTime));
+            LocalDateTime dateTime = LocalDateTime.parse(split[4], formatter);
+            newDistanceDto.add(new DistanceDto(Long.parseLong(split[0]), split[1], split[2],split[3], dateTime));
 
         }
         return newDistanceDto;
