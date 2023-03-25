@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: my_spring_boot_app
+
+  h2:
+    console:
+      enabled: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://barrier-free-database.clt6ptat3d1q.ap-northeast-2.rds.amazonaws.com:3306/together
+    username: mingeuni
+    password: 28tkeks**
+    hikari:
+      pool-name: jpa-hikari-pool
+      maximum-pool-size: 5
+      jdbc-url: ${spring.datasource.url}
+      username: ${spring.datasource.username}
+      password: ${spring.datasource.password}
+      driver-class-name: ${spring.datasource.driver-class-name}
+      data-source-properties:
+        rewriteBatchedStatements: true
+
+  # JPA 설정
+  jpa:
+    database: mysql
+    hibernate: # hibernate 사용 설정
+
+      # 애플리케이션 실행 시점에 테이블을 다 지우고, 내가 가진 entity 정보를 보고 다시 테이블 자동 생성
+      ddl-auto: update
+    properties: # property 사용 설정
+      hibernate: # hibernate property 설정
+        format_sql: true
+        use_sql_comments: true
+    show-sql: true
+    open-in-view: true
+  #    database-platform: org.hibernate.dialect.H2Dialect
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+#    activate:
+#      on-profile: local
+
+# 로그 레벨 설정
+logging:
+  level:
+    # hibernate 가 남기는 모든 로그가 debug모드로 설정
+    # jpa hibernate가 생성하는 sql이 로거를 통해서 찍히도록 하는 설정
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace # 실제 들어가는 파라미터값 찍어주는 설정
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
