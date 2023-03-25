@@ -3,6 +3,7 @@ package com.kusitms.together.api.domain.comment;
 import com.kusitms.together.api.domain.member.Member;
 import com.kusitms.together.api.domain.post.Post;
 import com.kusitms.together.api.domain.util.BaseTimeEntity;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
@@ -38,4 +39,12 @@ public class Comment extends BaseTimeEntity {
         @Column(name = "is_child")
         private Boolean isChild;
 
+        @Builder
+        public Comment(Post post, Member member, Comment parentComment, String content, Boolean isChild) {
+                this.post = post;
+                this.member = member;
+                this.parentComment = parentComment;
+                this.content = content;
+                this.isChild = isChild;
+        }
 }
