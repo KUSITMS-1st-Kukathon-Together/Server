@@ -41,4 +41,8 @@ public class Member {
         this.location = location;
         this.profileImage = profileImage;
     }
+
+    public void updateMyLocation(String location){
+        this.location = location;
+    }
 }
