@@ -1,5 +1,7 @@
 package com.kusitms.together.api.domain.post;
 
+import com.kusitms.together.api.domain.comment.Comment;
+import com.kusitms.together.api.domain.like.Like;
 import com.kusitms.together.api.domain.util.BaseTimeEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -7,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -44,6 +48,12 @@ public class Post extends BaseTimeEntity {
 
     @Column(name = "address")
     private String address;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "post")
+    private List<Like> likeList = new ArrayList<>();
 
     @Builder
     public Post(String location, String title, String content, Category category, Type type, Double latitude, Double longitude, String address) {
