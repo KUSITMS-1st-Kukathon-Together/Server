@@ -28,4 +28,9 @@ public class AuthController {
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
         return ResponseEntity.ok(authService.login(loginRequestDto));
     }
+
+    @PostMapping("/verify")
+    public ResponseEntity<String> verify(@RequestBody String loginId) {
+        return ResponseEntity.ok(authService.verify(loginId));
+    }
 }
