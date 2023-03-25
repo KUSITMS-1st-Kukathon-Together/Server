@@ -7,8 +7,12 @@ import com.kusitms.together.api.dto.post.request.WritePostRequestDto;
 import com.kusitms.together.api.dto.post.response.PostResponseDto;
 import com.kusitms.together.api.service.comment.CommentService;
 import com.kusitms.together.api.service.distance.DistanceDto;
+import com.kusitms.together.api.service.like.LikeDto;
+import com.kusitms.together.api.service.like.LikeReq;
+import com.kusitms.together.api.service.like.LikeService;
 import com.kusitms.together.api.service.post.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostService postService;
+    private final LikeService likeService;
 
     private final CommentService commentService;
 
@@ -35,5 +40,10 @@ public class PostController {
     @PostMapping("/{postId}/comment")
     public ResponseEntity<CommentResponseDto> writeComment(@AuthenticationPrincipal MemberAccount memberAccount, @PathVariable Long postId, @RequestBody WriteCommentRequestDto writeCommentRequestDto) {
         return ResponseEntity.ok(commentService.createComment(memberAccount.getMemberId(), postId, writeCommentRequestDto));
+        
+    @PostMapping("/{postId}/like")
+    public ResponseEntity<LikeDto> likePost(@AuthenticationPrincipal MemberAccount memberAccount,@PathVariable Long postId){
+        LikeReq likeReq = new LikeReq(postId,memberAccount.getMemberId());
+        return new ResponseEntity(likeService.like(likeReq), HttpStatus.OK);
     }
 }
