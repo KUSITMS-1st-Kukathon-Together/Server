@@ -50,7 +50,7 @@ public class SecurityConfig {
 //                .cors(AbstractHttpConfigurer::disable)
                 .formLogin().disable()
                 .authorizeRequests()
-                .antMatchers("/api/auth/sign-up", "/api/auth/login").permitAll()
+                .antMatchers("/api/auth/sign-up", "/api/auth/login", "/api/auth/verify").permitAll()
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated()
