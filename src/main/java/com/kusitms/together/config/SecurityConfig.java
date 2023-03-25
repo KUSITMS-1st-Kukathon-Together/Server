@@ -36,11 +36,7 @@ public class SecurityConfig {
             web.ignoring().antMatchers(
                     "/health",
                     "/swagger-ui.html",
-                    "/h2-console/**",
-                    "/api/auth/token",
-                    "/near",
-                    "/all",
-                    "/main"
+                    "/h2-console/**"
             );
         };
 
