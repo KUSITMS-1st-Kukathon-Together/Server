@@ -40,10 +40,11 @@ public class PostController {
     @PostMapping("/{postId}/comment")
     public ResponseEntity<CommentResponseDto> writeComment(@AuthenticationPrincipal MemberAccount memberAccount, @PathVariable Long postId, @RequestBody WriteCommentRequestDto writeCommentRequestDto) {
         return ResponseEntity.ok(commentService.createComment(memberAccount.getMemberId(), postId, writeCommentRequestDto));
-        
+    }
+
     @PostMapping("/{postId}/like")
     public ResponseEntity<LikeDto> likePost(@AuthenticationPrincipal MemberAccount memberAccount,@PathVariable Long postId){
         LikeReq likeReq = new LikeReq(postId,memberAccount.getMemberId());
-        return new ResponseEntity(likeService.like(likeReq), HttpStatus.OK);
+        return new ResponseEntity<>(likeService.like(likeReq), HttpStatus.OK);
     }
 }

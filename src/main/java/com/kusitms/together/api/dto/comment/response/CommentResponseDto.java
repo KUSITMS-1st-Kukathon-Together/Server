@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommentResponseDto {
@@ -23,7 +25,11 @@ public class CommentResponseDto {
 
         private Boolean isChild;
 
-        public CommentResponseDto(Long id, Long memberId, String memberName, String memberProfile, Long parentCommentId, String content, Boolean isChild) {
+        private LocalDateTime createdDate;
+
+        private LocalDateTime modifiedDate;
+
+        public CommentResponseDto(Long id, Long memberId, String memberName, String memberProfile, Long parentCommentId, String content, Boolean isChild, LocalDateTime createdDate, LocalDateTime modifiedDate) {
             this.id = id;
             this.memberId = memberId;
             this.memberName = memberName;
@@ -31,6 +37,8 @@ public class CommentResponseDto {
             this.parentCommentId = parentCommentId;
             this.content = content;
             this.isChild = isChild;
+            this.createdDate = createdDate;
+            this.modifiedDate = modifiedDate;
         }
 
         public static CommentResponseDto from(Comment comment) {
@@ -41,7 +49,9 @@ public class CommentResponseDto {
                     comment.getMember().getProfileImage(),
                     comment.getParentComment() == null ? null : comment.getParentComment().getId(),
                     comment.getContent(),
-                    comment.getIsChild()
+                    comment.getIsChild(),
+                    comment.getCreatedDate(),
+                    comment.getModifiedDate()
             );
         }
 }
