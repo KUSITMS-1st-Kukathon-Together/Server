@@ -38,7 +38,8 @@ public class SecurityConfig {
                     "/swagger-ui.html",
                     "/h2-console/**",
                     "/api/auth/token",
-                    "/near"
+                    "/near",
+                    "/all"
             );
         };
 

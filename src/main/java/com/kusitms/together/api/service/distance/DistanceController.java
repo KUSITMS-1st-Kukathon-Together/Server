@@ -1,5 +1,7 @@
 package com.kusitms.together.api.service.distance;
 
+import com.kusitms.together.api.domain.post.Category;
+import com.kusitms.together.api.domain.post.Type;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,5 +24,10 @@ public class DistanceController {
     @PostMapping("/near")
     public ResponseEntity<List<DistanceDto>> getNearPosts(@RequestBody DistanceReq req) {
         return new ResponseEntity<>(distanceService.getNearPosts(req.getLatitude(), req.getLongitude()), HttpStatus.OK);
+    }
+    @ResponseBody
+    @PostMapping("/all")
+    public ResponseEntity<List<DistanceDto>> getAllPosts(@RequestBody CategoryAndTypeReq CategoryAndTypeReq) {
+        return new ResponseEntity<>(distanceService.getAllPost(Category.valueOf(CategoryAndTypeReq.getCategory()), Type.valueOf(CategoryAndTypeReq.getType())), HttpStatus.OK);
     }
 }
