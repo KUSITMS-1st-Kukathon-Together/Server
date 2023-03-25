@@ -10,6 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PageRes {
+    private String location;
     private List<DistanceDto> nearPosts;
     private List<DistanceDto> AllPosts;
 }

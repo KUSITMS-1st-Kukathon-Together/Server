@@ -1,4 +1,4 @@
-package com.kusitms.together.api.controller.addr;
+package com.kusitms.together.api.service.addr;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ public class NaverGeoApi {
     String clientId = "yza6l09ms5 ";  //clientId
     String clientSecret = "O4adfQLtt58vCPGwgHkPZqXlHe8Iyzewk3g2mFuZ ";  //clientSecret
 
-    public String getAddr (String lat, String lng) throws Exception {
+    public String getAddr (double lat, double lng) throws Exception {
 
             try {
 
