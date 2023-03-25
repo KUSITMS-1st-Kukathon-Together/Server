@@ -1,8 +1,11 @@
 package com.kusitms.together.api.controller.post;
 
 import com.kusitms.together.api.domain.member.MemberAccount;
+import com.kusitms.together.api.dto.comment.request.WriteCommentRequestDto;
+import com.kusitms.together.api.dto.comment.response.CommentResponseDto;
 import com.kusitms.together.api.dto.post.request.WritePostRequestDto;
 import com.kusitms.together.api.dto.post.response.PostResponseDto;
+import com.kusitms.together.api.service.comment.CommentService;
 import com.kusitms.together.api.service.distance.DistanceDto;
 import com.kusitms.together.api.service.like.LikeDto;
 import com.kusitms.together.api.service.like.LikeReq;
@@ -22,6 +25,8 @@ public class PostController {
     private final PostService postService;
     private final LikeService likeService;
 
+    private final CommentService commentService;
+
     @PostMapping
     public ResponseEntity<PostResponseDto> writePost(@AuthenticationPrincipal MemberAccount memberAccount, @RequestBody WritePostRequestDto writePostRequestDto) {
         return ResponseEntity.ok(postService.writePost(memberAccount.getMemberId(), writePostRequestDto));
@@ -32,6 +37,10 @@ public class PostController {
         return ResponseEntity.ok(postService.getPost(postId));
     }
 
+    @PostMapping("/{postId}/comment")
+    public ResponseEntity<CommentResponseDto> writeComment(@AuthenticationPrincipal MemberAccount memberAccount, @PathVariable Long postId, @RequestBody WriteCommentRequestDto writeCommentRequestDto) {
+        return ResponseEntity.ok(commentService.createComment(memberAccount.getMemberId(), postId, writeCommentRequestDto));
+        
     @PostMapping("/{postId}/like")
     public ResponseEntity<LikeDto> likePost(@AuthenticationPrincipal MemberAccount memberAccount,@PathVariable Long postId){
         LikeReq likeReq = new LikeReq(postId,memberAccount.getMemberId());
