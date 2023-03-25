@@ -45,4 +45,12 @@ public class AuthService {
 
         return new AuthResponseDto("success", jwtUtil.generateToken(member.getId(), member.getLoginId(), member.getRole()));
     }
+
+    public String verify(String loginId) {
+        if (memberRepository.existsByLoginId(loginId)) {
+            return "false";
+        }
+
+        return "true";
+    }
 }
