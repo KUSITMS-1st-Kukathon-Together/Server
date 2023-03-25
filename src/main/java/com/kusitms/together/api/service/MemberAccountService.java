@@ -20,8 +20,7 @@ public class MemberAccountService implements UserDetailsService {
         Jws<Claims> claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
         Long userId = claims.getBody().get("member_id", Long.class);
         String studentId = claims.getBody().get("login_id", String.class);
-        Role role = Role.valueOf(claims.getBody().get("role", String.class));
 
-        return new MemberAccount(userId, studentId, role);
+        return new MemberAccount(userId, studentId, Role.ROLE_USER);
     }
 }
