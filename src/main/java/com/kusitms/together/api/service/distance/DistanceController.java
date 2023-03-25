@@ -14,6 +14,7 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class DistanceController {
 
     private final DistanceService distanceService;
@@ -31,4 +32,9 @@ public class DistanceController {
         return new ResponseEntity<>(new PageRes(addr,nearPosts,allPost), HttpStatus.OK);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<DistanceDto>> mainPage(@RequestParam String keyword) throws Exception {
+
+        return ResponseEntity.ok().body(distanceService.getPostsByKeyword(keyword));
+    }
 }

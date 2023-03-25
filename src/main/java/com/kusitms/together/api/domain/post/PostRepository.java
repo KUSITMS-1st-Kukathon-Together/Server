@@ -18,6 +18,9 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("select new com.kusitms.together.api.service.distance.DistanceDto(p.id,p.title,p.location,p.content,p.createdDate) from Post p where p.category =:category and p.type =:type order by p.createdDate desc")
     List<DistanceDto> getAllPostByCategoryAndType(@Param("category") Category category, @Param("type") Type type);
+
+    @Query("select new com.kusitms.together.api.service.distance.DistanceDto(p.id,p.title,p.location,p.content,p.createdDate) from Post p where p.title like %:keyword% order by p.createdDate desc")
+    List<DistanceDto> getAllPostByKeyword(@Param("keyword") String keyword);
 }
 
 //

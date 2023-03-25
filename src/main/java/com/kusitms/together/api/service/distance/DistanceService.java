@@ -37,4 +37,7 @@ public class DistanceService {
     }
 
 
+    public List<DistanceDto> getPostsByKeyword(String keyword) {
+        return postRepository.getAllPostByKeyword(keyword);
+    }
 }
