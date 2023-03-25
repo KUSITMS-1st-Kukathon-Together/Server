@@ -10,7 +10,6 @@ import org.hibernate.annotations.Fetch;
 import javax.persistence.*;
 
 @Getter
-
 @NoArgsConstructor
 @Entity
 @Table(name = "OG_COMMENT")

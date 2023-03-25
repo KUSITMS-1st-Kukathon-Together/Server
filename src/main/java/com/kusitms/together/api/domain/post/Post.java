@@ -11,13 +11,13 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "Post")
+@Table(name = "OG_POST")
 public class Post extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id")
-    private Long idd;
+    private Long id;
 
     @Column(name = "location", nullable = false)
     private String location;
