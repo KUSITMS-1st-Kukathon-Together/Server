@@ -1,4 +1,4 @@
-package com.kusitms.together.api.controller.addr;
+package com.kusitms.together.api.service.addr;
 
 import lombok.Data;
 
